@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h3>Player Team</h3>
+      </div>
+      <div class="card-body">
+        <% @players.each do |player| %>
+        <div class="card">
+          <div class="card-body">
+            <%= player.name %>
+            <br>
+            Health: <%= player.health %> / 100
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3>Controls</h3>
+      </div>
+      <div class="card-body">
+        <h3>Location: <%= @location.name %></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Enemy Team</h3>
+    </div>
+    <div class="card-body">
+      <p>enemies</p>
+    </div>
+  </div>
+
+</div>

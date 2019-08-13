@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_162439) do
+ActiveRecord::Schema.define(version: 2019_08_13_225804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,13 @@ ActiveRecord::Schema.define(version: 2019_08_13_162439) do
   create_table "enemies", force: :cascade do |t|
     t.integer "location_id"
     t.integer "health"
-    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "type_of"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_162439) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
+    t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -42,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_162439) do
     t.integer "health"
     t.integer "level"
     t.integer "location_id"
+    t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -62,7 +70,8 @@ ActiveRecord::Schema.define(version: 2019_08_13_162439) do
   end
 
   add_foreign_key "enemies", "locations"
-  add_foreign_key "locations", "users"
+  add_foreign_key "games", "users"
+  add_foreign_key "locations", "games"
+  add_foreign_key "players", "games"
   add_foreign_key "players", "locations"
-  add_foreign_key "players", "users"
 end

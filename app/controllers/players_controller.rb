@@ -5,17 +5,18 @@ class PlayersController < ApplicationController
   end
 
   def new
+    @game = Game.find(params[:game_id])
     @player = Player.new
-
     render :new
   end
 
   def create
+    @game = Game.find(params[:game_id])
     @player = Player.new(player_params)
-    @player.user_id = current_user.id
+    @player.health = 100
     if @player.save
       flash[:notice] = "player successfully added!"
-      redirect_to locations_path
+      redirect_to game_path(@game)
     else
       render :new
     end
@@ -29,6 +30,6 @@ class PlayersController < ApplicationController
 
   private
   def player_params
-    params.require(:player).permit(:name, :health, :location_id)
+    params.require(:player).permit(:name, :health, :location_id, :game_id)
   end
 end

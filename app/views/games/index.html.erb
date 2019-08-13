@@ -1,0 +1,21 @@
+<h1>Action Blasters</h1>
+<% if current_user %>
+
+  <h2>Games</h2>
+    <% if @games.any? %>
+    <ul>
+      <% @games.each_with_index do |game, index| %>
+        <li><%= link_to "Game Save: #{index+1}", game_path(game) %></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>No games added yet.</p>
+  <% end %>
+
+  <p><%= link_to "Create a Game", games_path(@game), method: :post %></p>
+
+<% else %>
+  <br>
+  <h3>Please Sign in to view game details</h3>
+  <br>
+<% end %>

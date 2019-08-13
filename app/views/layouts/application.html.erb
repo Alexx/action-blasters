@@ -10,11 +10,13 @@
   </head>
 
   <body>
-    <% if current_user %>
-        <%= current_user.email %> | <%= link_to "Sign out", '/users/sign_out', method: :delete %>
+    <div class="container">
+      <% if current_user %>
+      <%= current_user.email %> | <%= link_to "Sign out", '/users/sign_out', method: :delete %>
       <% else %>
-        <%= link_to "Sign up", '/users/sign_up' %> | <%= link_to "Sign in", '/users/sign_in' %>
+      <%= link_to "Sign up", '/users/sign_up' %> | <%= link_to "Sign in", '/users/sign_in' %>
       <% end %>
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -5,6 +5,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.integer :health
       t.integer :level
       t.integer :location_id
+      t.integer :game_id
 
       t.timestamps
     end

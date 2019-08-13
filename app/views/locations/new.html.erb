@@ -1,2 +1,8 @@
 <h1>Add a new location</h1>
-<%= render "layouts/location_form" %>
+<%= form_for @location, :url => game_locations_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :game_id, :value => @game.id%>
+
+  <%= f.submit %>
+<% end %>

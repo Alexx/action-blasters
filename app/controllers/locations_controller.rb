@@ -9,15 +9,16 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    @game = Game.find(params[:game_id])
     render :new
   end
 
   def create
+    @game = Game.find(params[:game_id])
     @location = Location.new(location_params)
-    @location.user_id = current_user.id
     if @location.save
       flash[:notice] = "Location successfully added!"
-      redirect_to locations_path
+      redirect_to enemies_path(location_id: @location.id)
     else
       render :new
     end
@@ -25,6 +26,6 @@ class LocationsController < ApplicationController
 
   private
   def location_params
-    params.require(:location).permit(:name)
+    params.require(:location).permit(:name, :game_id)
   end
 end
