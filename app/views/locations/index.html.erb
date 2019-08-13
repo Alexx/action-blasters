@@ -1,0 +1,32 @@
+<h1>Action Blasters</h1>
+<% if current_user %>
+  <h2>Locations</h2>
+    <% if @locations.any? %>
+    <ul>
+      <% @locations.each do |location| %>
+        <li><%= link_to location.name, location_path(location) %></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>No locations added yet.</p>
+  <% end %>
+  <h2>Players</h2>
+    <% if @players.any? %>
+    <ul>
+      <% @players.each do |player| %>
+        <li><%= link_to player.name, player_path(player) %></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>No players added yet.</p>
+  <% end %>
+  <p><%= link_to "Add an Location", new_location_path(@location) %></p>
+  <% if @locations.any? %>
+  <p><%= link_to "Add a Player", new_player_path(@player) %></p>
+  <% end %>
+
+<% else %>
+  <br>
+  <h3>Please Sign in to view game details</h3>
+  <br>
+<% end %>

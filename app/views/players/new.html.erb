@@ -1,0 +1,9 @@
+<h1>Add a new Player</h1>
+
+<%= form_for @player do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label :location %><br>
+  <%= f.select :location_id, Location.all.collect {|p| [p.name, p.id]} %><br>
+  <%= f.submit %>
+<% end %>
