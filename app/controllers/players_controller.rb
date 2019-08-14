@@ -14,6 +14,7 @@ class PlayersController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.new(player_params)
     @player.health = 100
+    @player.alive = true
     if @player.save
       flash[:notice] = "player successfully added!"
       redirect_to game_path(@game)

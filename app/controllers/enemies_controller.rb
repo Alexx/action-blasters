@@ -8,6 +8,7 @@ class EnemiesController < ApplicationController
       @enemy = Enemy.new({:type_of => enemy_types[rand(0..3)], :health => 100})
       @enemy.location_id = @location.id
       @enemy.selected = false
+      @enemy.alive = true
       if @enemy.save
         flash[:notice] = "Enemy successfully added!"
       end

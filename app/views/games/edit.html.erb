@@ -10,7 +10,11 @@
           <% if index == @game.current_player%>
             <div class="card-body selected-player">
           <% else %>
-            <div class="card-body">
+            <% if player.alive %>
+              <div class="card-body">
+            <% else %>
+              <div class="card-body dead-player">
+            <% end %>
           <% end %>
             <%= player.name %>
             <br>
@@ -46,14 +50,20 @@
         <% @enemies.each_with_index do |enemy, index| %>
         <%= link_to location_enemy_path(id: enemy.id, location_id: enemy.location_id), method: :patch do %>
         <div class="card">
-          <% if enemy.selected %>
-          <div class="card-body selected-enemy" id="<%= index %>">
+          <% if enemy.alive == false %>
+            <div class="card-body dead-player" id="<%= index %>">
+          <% else%>
+            <% if enemy.selected%>
+              <div class="card-body selected-enemy" id="<%= index %>">
             <% else%>
-            <div class="card-body" id="<%= index %>">
-              <% end %>
-              <%= enemy.type_of %>
-              <br>
-              Health: <%= enemy.health %> / 100
+              <div class="card-body" id="<%= index %>">
+            <% end %>
+
+          <% end %>
+
+          <%= enemy.type_of %>
+          <br>
+          Health: <%= enemy.health %> / 100
             </div>
           </div>
           <% end%>

@@ -5,7 +5,7 @@
     <% if @games.any? %>
     <ul>
       <% @games.each_with_index do |game, index| %>
-        <li><%= link_to "Game Save: #{index+1}", game_path(game) %></li>
+        <li><%= link_to "Game Save: #{index+1}", game_path(id: game.id) %></li>
       <% end %>
   </ul>
   <% else %>
