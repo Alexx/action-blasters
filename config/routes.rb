@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   get '/games' => 'games#index'
-  get '/enemies' => 'enemies#create'
+  get '/games/attack' => 'games#attack'
   devise_for :users
   root to: 'games#index'
   resources :games do
     resources :locations
     resources :players
+  end
+
+  resources :locations do
+    resources :enemies
   end
   # resources :users do
   # end

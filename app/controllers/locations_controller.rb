@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       flash[:notice] = "Location successfully added!"
-      redirect_to enemies_path(location_id: @location.id)
+      redirect_to location_enemies_path(location_id: @location.id)
     else
       render :new
     end

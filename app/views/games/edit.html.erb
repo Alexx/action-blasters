@@ -5,9 +5,13 @@
         <h3>Player Team</h3>
       </div>
       <div class="card-body">
-        <% @players.each do |player| %>
+        <% @players.each_with_index do |player, index| %>
         <div class="card">
-          <div class="card-body">
+          <% if index == @game.current_player%>
+            <div class="card-body selected-player">
+          <% else %>
+            <div class="card-body">
+          <% end %>
             <%= player.name %>
             <br>
             Health: <%= player.health %> / 100
@@ -22,20 +26,39 @@
     <div class="card">
       <div class="card-header">
         <h3>Controls</h3>
+
       </div>
       <div class="card-body">
         <h3>Location: <%= @location.name %></h3>
+        <h4> Current Player: <%= @players[@game.current_player].name %></h4>
+
+        <%= button_to "Attack", games_attack_path, method: :get, params: { id: @game.id } %>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <h3>Enemy Team</h3>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h3>Enemy Team</h3>
+      </div>
+      <div class="card-body">
+        <% @enemies.each_with_index do |enemy, index| %>
+        <%= link_to location_enemy_path(id: enemy.id, location_id: enemy.location_id), method: :patch do %>
+        <div class="card">
+          <% if enemy.selected %>
+          <div class="card-body selected-enemy" id="<%= index %>">
+            <% else%>
+            <div class="card-body" id="<%= index %>">
+              <% end %>
+              <%= enemy.type_of %>
+              <br>
+              Health: <%= enemy.health %> / 100
+            </div>
+          </div>
+          <% end%>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-      <p>enemies</p>
-    </div>
-  </div>
-
 </div>

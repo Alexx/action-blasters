@@ -4,7 +4,7 @@
   <%= f.label :name %><br>
   <%= f.text_field :name %><br>
   <%= f.label :location %><br>
-  <%= f.select :location_id, Location.all.collect {|p| [p.name, p.id]} %><br>
+  <%= f.select :location_id, Location.where(game_id: @game.id).collect {|p| [p.name, p.id]} %><br>
   <%= f.hidden_field :game_id, :value => @game.id%>
   <%= f.submit %>
 <% end %>

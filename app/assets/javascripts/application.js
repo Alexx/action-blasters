@@ -17,3 +17,10 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
+
+// $(document).ready(function() {
+//   $(".enemy").on("click", function(){
+//     $(".enemy").removeClass("selected-enemy")
+//     $("#"+this.id).addClass("selected-enemy")
+//   });
+// });

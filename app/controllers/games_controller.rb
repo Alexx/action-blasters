@@ -1,13 +1,15 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.where(user_id: current_user.id)
-    @game = Game.new
+    if current_user
+      @games = Game.where(user_id: current_user.id)
+    end
     render :index
   end
 
   def create
-    byebug
+    @game = Game.new
     @game.user_id = current_user.id
+    @game.current_player = 0
     @game.save
     redirect_to games_path
   end
@@ -24,7 +26,36 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @players = Player.where(game_id: @game.id)
     @location = Location.find(@players[0].location_id)
+    @enemies = Enemy.where(location_id: @location.id).order("id DESC")
     render :edit
   end
 
+  def enemy_attack
+    @game = Game.find(params[:id])
+    @players = Player.where(game_id: @game.id)
+    @player = @players[@game.current_player]
+    @enemy = Enemy.where(selected: true).limit(1)[0]
+    @player.health -= 10
+    @player.save
+    redirect_to edit_game_path(id: @game.id)
+
+  end
+
+  def attack
+    @game = Game.find(params[:id])
+    @players = Player.where(game_id: @game.id)
+    @player = @players[@game.current_player]
+    @enemy = Enemy.where(selected: true).limit(1)[0]
+    @enemy.health -= 10
+    @enemy.save
+
+    @game.current_player += 1
+    if @game.current_player >= @players.length
+      @game.current_player = 0
+    end
+    @game.save
+
+    redirect_to edit_game_path(id: @game.id)
+
+  end
 end

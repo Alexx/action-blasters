@@ -15,3 +15,15 @@
  */
 
 @import "bootstrap";
+
+.selected-enemy {
+  border-style: solid;
+  border-width: 5px;
+  border-color: darkred;
+}
+
+.selected-player {
+  border-style: solid;
+  border-width: 5px;
+  border-color: darkblue;
+}
