@@ -38,7 +38,7 @@ class GamesController < ApplicationController
       players = Player.where(game_id: @game.id).where("health > ?", 0)
       if players.any?
         randomPlayer = players[rand(0..players.length-1)]
-        randomPlayer.health -= 10
+        randomPlayer.health -= rand(1..50)
         if randomPlayer.health <= 0
           randomPlayer.alive = false
           randomPlayer.health = 0
@@ -54,7 +54,7 @@ class GamesController < ApplicationController
     @player = @players[@game.current_player]
     @enemies = Enemy.where(location_id: @player.location_id)
     @enemy = Enemy.where(selected: true).limit(1)[0]
-    @enemy.health -= 20
+    @enemy.health -= rand(1..50)
     if @enemy.health <= 0
       @enemy.alive = false
       @enemy.health = 0

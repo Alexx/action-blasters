@@ -4,7 +4,7 @@ class EnemiesController < ApplicationController
     @location = Location.find(params[:location_id])
     enemy_types = ["Skeleton", "Zombie", "Ghoul", "Kim Jong Un"]
 
-    rand(1..5).times do
+    rand(3..5).times do
       @enemy = Enemy.new({:type_of => enemy_types[rand(0..3)], :health => 100})
       @enemy.location_id = @location.id
       @enemy.selected = false
